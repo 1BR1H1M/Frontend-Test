@@ -1,0 +1,22 @@
+---
+const task = await fetch("http://localhost:3000/tasks")
+.then((res)  => res.json())
+.then((data) => data)
+.catch((error) => console.log(error))
+
+---
+
+<div x-data=`{tasks: ${JSON.stringify(task)}}` class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+  <h1 class="text-2xl font-bold mb-4">Lista de Tareas</h1>
+  <ul>
+    <template x-for="task in tasks">
+      <li x-text="task.text"></li>
+    </template>
+  </ul>
+  <form action="http://localhost:3000/tasks" method="POST">
+    <input type="text" name="text" placeholder="Nueva tarea" class="border p-2 w-full" />
+    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Agregar Tarea</button>
+  </form>
+  
+</div>
+
